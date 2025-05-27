@@ -16,7 +16,10 @@ services:
       # Criar conexão com o container do banco de dados
       - mysql
       - postgres
-    
+    depends_on:
+      - mysql
+      - postgres
+
   postgres:
     image: postgres:12
     container_name: caioape-ifsp-pgsql
@@ -27,29 +30,29 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./postgres:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql/data
     networks:
       - lamp-network
-    
+
   pgadmin:
     image: dpage/pgadmin4
     container_name: caioape-ifsp-pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: postgres@servidor.com
       PGADMIN_DEFAULT_PASSWORD: postdba
-    ports: 
+    ports:
       - 8081:80
     depends_on:
       - postgres
     networks:
-    - lamp-network
+      - lamp-network
 
   mysql:
     image: mysql:5.7 # A versão 8 está com instabilidades
     container_name: caioape-ifsp-mysql
     restart: always # Por padrão, o Docker não reinicia o container, alterando isso
     volumes:
-      - ./mysql:/var/lib/mysql
+      - mysql:/var/lib/mysql
     ports:
       - "3306:3306" # Porta para funcionamento no DBeaver, mas não pe obrigatória.
     environment:
@@ -57,7 +60,7 @@ services:
       MYSQL_DATABASE: teste # Iniciar o container com um banco de dados
     networks:
       - lamp-network
-  
+
   phpmyadmin:
     build:
       context: ./phpmyadmin
@@ -87,3 +90,4 @@ volumes:
   mysql:
   web:
     driver: local
+  phpmyadmin-sessions: {} # Volume para as sessões do phpmyadmin
