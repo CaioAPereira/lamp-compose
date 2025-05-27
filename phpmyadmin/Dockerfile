@@ -1,0 +1,1 @@
+FROM phpmyadmin/mphpmyadmin:5.2.0
