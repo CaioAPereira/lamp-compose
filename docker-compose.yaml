@@ -3,20 +3,19 @@ services:
     build:
       context: ./php # Indica onde está o arquivo Dockerfile
       dockerfile: Dockerfile
-
-      container_name: caioape-ifsp-php # Apelido para o container
-      restart: always
-      volumes:
-        - ./web:/var/www/html/ # Irá copiar o conteúdo da pasta src para o container
-      networks:
-        - lamp-network
-      ports:
-        # Mapear as portas para ficarem visiveis na máquina host
-        - "80:80"
-      links:
-        # Criar conexão com o container do banco de dados
-        - mysql
-        - postgres
+    container_name: caioape-ifsp-php # Apelido para o container
+    restart: always
+    volumes:
+      - ./web:/var/www/html/ # Irá copiar o conteúdo da pasta src para o container
+    networks:
+      - lamp-network
+    ports:
+      # Mapear as portas para ficarem visiveis na máquina host
+      - "80:80"
+    links:
+      # Criar conexão com o container do banco de dados
+      - mysql
+      - postgres
     
   postgres:
     image: postgres:12
