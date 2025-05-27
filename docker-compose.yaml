@@ -7,7 +7,7 @@ services:
       container_name: caioape-ifsp-php # Apelido para o container
       restart: always
       volumes:
-        - ./web: /var/www/html/ # Irá copiar o conteúdo da pasta src para o container
+        - ./web:/var/www/html/ # Irá copiar o conteúdo da pasta src para o container
       networks:
         - lamp-network
       ports:
@@ -28,7 +28,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./postgres: /var/lib/postgresql/data
+      - ./postgres:/var/lib/postgresql/data
     networks:
       - lamp-network
     
@@ -66,8 +66,7 @@ services:
 
       container_name: caioape-ifsp-phpmyadmin
       restart: always
-      volumes:
-        - /sessions
+      volumes:/sessions
       ports:
         - "8080:80"
       links:
