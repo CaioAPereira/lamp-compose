@@ -76,7 +76,7 @@ services:
       PMA_ARBITRARY: 0 # 1 Isso executará o phpmyadmin como um servidor de banco
       PMA_HOST: mysql;
     networks:
-      lamp-network
+      - lamp-network
 
 networks:
   lamp-network:
