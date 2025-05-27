@@ -47,7 +47,7 @@ services:
 
   mysql:
     image: mysql:5.7 # A versão 8 está com instabilidades
-    container_name: caioape-ifs-mysql
+    container_name: caioape-ifsp-mysql
     restart: always # Por padrão, o Docker não reinicia o container, alterando isso
     volumes:
       - ./mysql:/var/lib/mysql
